@@ -23,7 +23,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newHorizon";
 mongoose.connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 console.log("Adding cron job for scraping");
-cron.schedule("* 0 * * *", () => {
+cron.schedule("* */6 * * *", () => {
     const scrape = exec('node scripts/scrape.js', function (error, stdout, stderr) {
         if (error) {
             console.log(error.stack);
@@ -31,6 +31,9 @@ cron.schedule("* 0 * * *", () => {
             console.log('Signal received: ' + error.signal);
         }
     });
+    scrape.on('exit', function (code) {
+        console.log('Child process exited with exit code '+code);
+    })
 })
 
 // Start the API server

@@ -9,7 +9,7 @@ const db = require("../models");
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newHorizon";
 mongoose.connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
-
+console.log("Starting scraping")
 let sections = ["Fish_(New_Horizons)", "Bugs_(New_Horizons)"];
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let promises = [];
