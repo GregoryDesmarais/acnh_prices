@@ -29,58 +29,13 @@ class Main extends Component {
     }
 
     getData = () => {
-        switch (this.state.type) {
-            case "Fish":
-                API.getFish()
-                    .then(res => {
-                        let time = new Set();
-                        let location = new Set();
-                        res.data.forEach(item => {
-                            time.add(item.time)
-                            location.add(item.location)
-                        })
-                        this.setState({
-                            data: res.data,
-                            times: Array.from(time),
-                            locations: Array.from(location)
-                        }, () => this.runFilter())
-                    })
-                break;
-            case "Bugs":
-                API.getBugs()
-                    .then(res => {
-                        let time = new Set();
-                        let location = new Set();
-                        res.data.forEach(item => {
-                            time.add(item.time)
-                            location.add(item.location)
-                        })
-                        this.setState({
-                            data: res.data,
-                            times: Array.from(time),
-                            locations: Array.from(location)
-                        }, () => this.runFilter())
-                    })
-                break;
-            case "All":
-                API.getAll()
-                    .then(res => {
-                        let time = new Set();
-                        let location = new Set();
-                        res.data.forEach(item => {
-                            time.add(item.time)
-                            location.add(item.location)
-                        })
-                        this.setState({
-                            data: res.data,
-                            times: Array.from(time),
-                            locations: Array.from(location)
-                        }, () => this.runFilter())
-                    })
-                break;
 
-            default: break;
-        }
+        API.getAll()
+            .then(res => {
+                this.setState({
+                    data: res.data
+                }, () => this.runFilter())
+            })
     }
 
     searchChange = (event) => {
@@ -88,13 +43,42 @@ class Main extends Component {
         this.setState({
             [id]: value
         }, () => {
-            this.getData();
+            // this.getData();
             this.runFilter()
         });
     }
 
+    getFilters = (data) => {
+        let time = new Set();
+        let location = new Set();
+        data.forEach(item => {
+            time.add(item.time)
+            location.add(item.location)
+        })
+        this.setState({
+            times: Array.from(time),
+            locations: Array.from(location)
+        })
+
+    }
+
     runFilter = () => {
-        let newFilter = this.state.data.filter(item => item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) > -1)
+        let newFilter = [];
+        switch (this.state.type) {
+            case "Fish":
+                newFilter = this.state.data.fish;
+                this.getFilters(newFilter)
+                break;
+            case "Bugs":
+                newFilter = this.state.data.bugs
+                this.getFilters(newFilter)
+                break;
+            default:
+                newFilter = this.state.data.fish.concat(this.state.data.bugs);
+                this.getFilters(newFilter)
+                break;
+        }
+        newFilter = newFilter.filter(item => item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) > -1)
         if (this.state.month !== "") {
             newFilter = newFilter.filter(item => item.months.includes(this.state.month))
         }

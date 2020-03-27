@@ -14,8 +14,10 @@ module.exports = {
                         .then((data2, err) => {
                             if (err)
                                 console.log(err);
-                            let info = data.concat(data2);
-                            res.json(info);
+                            res.json({
+                                fish: data,
+                                bugs: data2
+                            });
                         })
                 }
             })
