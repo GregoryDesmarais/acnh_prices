@@ -188,10 +188,10 @@ class Main extends Component {
                                     <Card key={i}>
                                         <Card.Header><h4>{item.name}</h4></Card.Header>
                                         <Card.Body>
-                                            <p>Price: {item.price}</p>
-                                            <p>Location: {item.location}</p>
-                                            <p>Time: {item.time}</p>
-                                            <p>Available:</p>
+                                            <h5>Price: {item.price}</h5>
+                                            <h5>Location: {item.location}</h5>
+                                            <h5>Time: {item.time}</h5>
+                                            <h5>Available:</h5>
                                             <Container>
                                                 <Row className="months">
                                                     {
