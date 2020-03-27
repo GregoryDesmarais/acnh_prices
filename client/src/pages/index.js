@@ -126,7 +126,7 @@ class Main extends Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row className='text-center'>
+                        <Row >
                             <Col>
                                 <Form.Group controlId='search'>
                                     <Form.Label>Filter by Name</Form.Label>
@@ -147,7 +147,7 @@ class Main extends Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row className='text-center'>
+                        <Row >
                             <Col >
                                 <Form.Group controlId='time'>
                                     <Form.Label>Filter by Time</Form.Label>
@@ -161,7 +161,7 @@ class Main extends Component {
                                     </FormControl>
                                 </Form.Group>
                             </Col>
-                            <Col className='text-center'>
+                            <Col >
                                 <Form.Group controlId='location'>
                                     <Form.Label>Filter by Location</Form.Label>
                                     <FormControl as="select" onChange={this.searchChange} value={this.state.location} name='acnhsearch'>
@@ -175,40 +175,43 @@ class Main extends Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row className='text-center'>
+                        <Row >
                             <Col >
                                 <Button onClick={this.clearSearch}>Clear Filters</Button>
                             </Col>
                         </Row>
                     </Col>
-                    <Col lg={6} className="results">
-                        {
-                            this.state.filter.map((item, i) => {
-                                return (
-                                    <Card key={i}>
-                                        <Card.Header><h4>{item.name}</h4></Card.Header>
-                                        <Card.Body>
-                                            <h5>Price: {item.price}</h5>
-                                            <h5>Location: {item.location}</h5>
-                                            <h5>Time: {item.time}</h5>
-                                            <h5>Available:</h5>
-                                            <Container>
-                                                <Row className="months">
-                                                    {
-                                                        item.months.map((month, j) => {
-                                                            if (curMonth === month)
-                                                                return (<Col key={j} xs={3} className="curMonth">{month}</Col>)
-                                                            else
-                                                                return (<Col key={j} xs={3}>{month}</Col>)
-                                                        })
-                                                    }
-                                                </Row>
-                                            </Container>
-                                        </Card.Body>
-                                    </Card>
-                                )
-                            })
-                        }
+                    <Col lg={6}>
+                        <h4 className="label">Results: {this.state.filter.length}</h4>
+                        <div className="results">
+                            {
+                                this.state.filter.map((item, i) => {
+                                    return (
+                                        <Card key={i}>
+                                            <Card.Header><h4>{item.name}</h4></Card.Header>
+                                            <Card.Body>
+                                                <h5>Price: {item.price}</h5>
+                                                <h5>Location: {item.location}</h5>
+                                                <h5>Time: {item.time}</h5>
+                                                <h5>Available:</h5>
+                                                <Container>
+                                                    <Row className="months">
+                                                        {
+                                                            item.months.map((month, j) => {
+                                                                if (curMonth === month)
+                                                                    return (<Col key={j} xs={3} className="curMonth">{month}</Col>)
+                                                                else
+                                                                    return (<Col key={j} xs={3}>{month}</Col>)
+                                                            })
+                                                        }
+                                                    </Row>
+                                                </Container>
+                                            </Card.Body>
+                                        </Card>
+                                    )
+                                })
+                            }
+                        </div>
                     </Col>
                 </Row >
             </Container >

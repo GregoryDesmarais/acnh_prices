@@ -1,5 +1,6 @@
 .curMonth {
-    background-color: orange;
+    background-color: green;
+    color: white;
     font-weight: bold;
 }
 
@@ -9,7 +10,8 @@
 }
 
 .results {
-    max-height: 20em;
+    height: 52vh;
+    overflow-y: scroll;
 }
 
 .months {
@@ -23,4 +25,33 @@
     text-align: center;
     margin: .25em .25em;
     padding: .5em .5em;
+}
+
+body {
+    background: #f1f1f1 url("/img/Grass.png") top left repeat;
+}
+
+.card {
+    background-color: rgb(250, 188, 126);
+}
+
+.card-header {
+    background-color: rgb(255, 171, 87);
+}
+
+label,
+select,
+.label {
+    background-color: rgb(250, 188, 126);
+    border-radius: .25em;
+    padding: .25em;
+    font-weight: bold;
+}
+
+.row {
+    text-align: center;
+}
+
+.col-lg-6 {
+    margin: 1em 0;
 }
