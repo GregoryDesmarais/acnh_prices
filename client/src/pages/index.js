@@ -133,7 +133,7 @@ class Main extends Component {
                         <Row className='text-center'>
                             <Col>
                                 <Form.Group controlId='type'>
-                                    <Form.Label>Search by Type</Form.Label>
+                                    <Form.Label>Filter by Type</Form.Label>
                                     <FormControl as="select" onChange={this.searchChange} value={this.state.type} name='acnhsearch'>
                                         <option value="All">All</option>
                                         <option value="Fish">Fish</option>
@@ -143,13 +143,13 @@ class Main extends Component {
                             </Col>
                             <Col>
                                 <Form.Group controlId='search'>
-                                    <Form.Label>Search by Name</Form.Label>
+                                    <Form.Label>Filter by Name</Form.Label>
                                     <FormControl onChange={this.searchChange} value={this.state.search} name='acnhsearch' />
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group controlId='month'>
-                                    <Form.Label>Search by Month</Form.Label>
+                                    <Form.Label>Filter by Month</Form.Label>
                                     <FormControl as="select" onChange={this.searchChange} value={this.state.month} name='acnhsearch'>
                                         <option value="">Select</option>
                                         {this.state.months.map((month, i) => {
@@ -164,7 +164,7 @@ class Main extends Component {
                         <Row className='text-center'>
                             <Col >
                                 <Form.Group controlId='time'>
-                                    <Form.Label>Search by Time</Form.Label>
+                                    <Form.Label>Filter by Time</Form.Label>
                                     <FormControl as="select" onChange={this.searchChange} value={this.state.time} name='acnhsearch'>
                                         <option value="">Select</option>
                                         {this.state.times.map((time, i) => {
@@ -177,7 +177,7 @@ class Main extends Component {
                             </Col>
                             <Col className='text-center'>
                                 <Form.Group controlId='location'>
-                                    <Form.Label>Search by Location</Form.Label>
+                                    <Form.Label>Filter by Location</Form.Label>
                                     <FormControl as="select" onChange={this.searchChange} value={this.state.location} name='acnhsearch'>
                                         <option value="">Select</option>
                                         {this.state.locations.map((locations, i) => {
@@ -191,7 +191,7 @@ class Main extends Component {
                         </Row>
                         <Row className='text-center'>
                             <Col >
-                                <Button onClick={this.clearSearch}>Clear Search</Button>
+                                <Button onClick={this.clearSearch}>Clear Filters</Button>
                             </Col>
                         </Row>
                     </Col>
