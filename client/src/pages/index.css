@@ -1,0 +1,26 @@
+.curMonth {
+    background-color: orange;
+    font-weight: bold;
+}
+
+.list-group-item {
+    width: 16.6%;
+    text-align: center;
+}
+
+.results {
+    max-height: 20em;
+}
+
+.months {
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex: content;
+    display: flex;
+}
+
+.months div {
+    text-align: center;
+    margin: .25em .25em;
+    padding: .5em .5em;
+}

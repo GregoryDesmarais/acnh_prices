@@ -1,0 +1,9 @@
+{
+    "short_name": "acnh_prices",
+    "name": "Animal Crossing: New Horizon Prices",
+    "icons": [],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+}
