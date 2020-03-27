@@ -130,7 +130,7 @@ class Main extends Component {
             <Container>
                 <Row>
                     <Col lg={6}>
-                        <Row className='text-center'>
+                        <Row className="text-center">
                             <Col>
                                 <Form.Group controlId='type'>
                                     <Form.Label>Filter by Type</Form.Label>
@@ -141,6 +141,8 @@ class Main extends Component {
                                     </FormControl>
                                 </Form.Group>
                             </Col>
+                        </Row>
+                        <Row className='text-center'>
                             <Col>
                                 <Form.Group controlId='search'>
                                     <Form.Label>Filter by Name</Form.Label>
@@ -196,7 +198,6 @@ class Main extends Component {
                         </Row>
                     </Col>
                     <Col lg={6} className="results">
-                        {/* <h4>{`Results: ${this.state.filter.length}`}</h4> */}
                         {
                             this.state.filter.map((item, i) => {
                                 return (
