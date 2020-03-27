@@ -23,7 +23,8 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newHorizon";
 mongoose.connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 console.log("Adding cron job for scraping");
-cron.schedule("* */6 * * *", () => {
+cron.schedule("* */4 * * *", () => {
+    console.log("Refreshing data");
     const scrape = exec('node scripts/scrape.js', function (error, stdout, stderr) {
         if (error) {
             console.log(error.stack);
