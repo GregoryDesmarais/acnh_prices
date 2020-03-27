@@ -12,12 +12,16 @@ import "./index.css"
 class Main extends Component {
 
     state = {
-        type: "Fish",
+        type: "All",
         data: [],
         filter: [],
+        times: [],
+        locations: [],
+        months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         search: "",
         month: "",
-        months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        time: "",
+        location: ""
     }
 
     componentDidMount = () => {
@@ -25,12 +29,58 @@ class Main extends Component {
     }
 
     getData = () => {
-        API.getAll()
-            .then(res => {
-                this.setState({
-                    data: res.data
-                }, () => this.runFilter())
-            })
+        switch (this.state.type) {
+            case "Fish":
+                API.getFish()
+                    .then(res => {
+                        let time = new Set();
+                        let location = new Set();
+                        res.data.forEach(item => {
+                            time.add(item.time)
+                            location.add(item.location)
+                        })
+                        this.setState({
+                            data: res.data,
+                            times: Array.from(time),
+                            locations: Array.from(location)
+                        }, () => this.runFilter())
+                    })
+                break;
+            case "Bugs":
+                API.getBugs()
+                    .then(res => {
+                        let time = new Set();
+                        let location = new Set();
+                        res.data.forEach(item => {
+                            time.add(item.time)
+                            location.add(item.location)
+                        })
+                        this.setState({
+                            data: res.data,
+                            times: Array.from(time),
+                            locations: Array.from(location)
+                        }, () => this.runFilter())
+                    })
+                break;
+            case "All":
+                API.getAll()
+                    .then(res => {
+                        let time = new Set();
+                        let location = new Set();
+                        res.data.forEach(item => {
+                            time.add(item.time)
+                            location.add(item.location)
+                        })
+                        this.setState({
+                            data: res.data,
+                            times: Array.from(time),
+                            locations: Array.from(location)
+                        }, () => this.runFilter())
+                    })
+                break;
+
+            default: break;
+        }
     }
 
     searchChange = (event) => {
@@ -48,6 +98,12 @@ class Main extends Component {
         if (this.state.month !== "") {
             newFilter = newFilter.filter(item => item.months.includes(this.state.month))
         }
+        if (this.state.time !== "") {
+            newFilter = newFilter.filter(item => item.time.includes(this.state.time))
+        }
+        if (this.state.location !== "") {
+            newFilter = newFilter.filter(item => item.location.includes(this.state.location))
+        }
         this.setState({
             filter: newFilter
         })
@@ -56,7 +112,10 @@ class Main extends Component {
     clearSearch = () => {
         this.setState({
             search: "",
-            month: ""
+            month: "",
+            time: "",
+            location: "",
+            type: "All"
         }, () => this.runFilter())
     }
 
@@ -71,16 +130,17 @@ class Main extends Component {
             <Container>
                 <Row>
                     <Col lg={6}>
-                        <Row>
-                            {/* <Col>
+                        <Row className='text-center'>
+                            <Col>
                                 <Form.Group controlId='type'>
                                     <Form.Label>Search by Type</Form.Label>
                                     <FormControl as="select" onChange={this.searchChange} value={this.state.type} name='acnhsearch'>
+                                        <option value="All">All</option>
                                         <option value="Fish">Fish</option>
                                         <option value="Bugs">Bugs</option>
                                     </FormControl>
                                 </Form.Group>
-                            </Col> */}
+                            </Col>
                             <Col>
                                 <Form.Group controlId='search'>
                                     <Form.Label>Search by Name</Form.Label>
@@ -101,8 +161,36 @@ class Main extends Component {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className='text-center'>
+                            <Col >
+                                <Form.Group controlId='time'>
+                                    <Form.Label>Search by Time</Form.Label>
+                                    <FormControl as="select" onChange={this.searchChange} value={this.state.time} name='acnhsearch'>
+                                        <option value="">Select</option>
+                                        {this.state.times.map((time, i) => {
+                                            return (
+                                                <option key={i} value={time}>{time}</option>
+                                            )
+                                        })}
+                                    </FormControl>
+                                </Form.Group>
+                            </Col>
                             <Col className='text-center'>
+                                <Form.Group controlId='location'>
+                                    <Form.Label>Search by Location</Form.Label>
+                                    <FormControl as="select" onChange={this.searchChange} value={this.state.location} name='acnhsearch'>
+                                        <option value="">Select</option>
+                                        {this.state.locations.map((locations, i) => {
+                                            return (
+                                                <option key={i} value={locations}>{locations}</option>
+                                            )
+                                        })}
+                                    </FormControl>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className='text-center'>
+                            <Col >
                                 <Button onClick={this.clearSearch}>Clear Search</Button>
                             </Col>
                         </Row>
