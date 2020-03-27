@@ -15,7 +15,7 @@ module.exports = {
                             if (err)
                                 console.log(err);
                             let info = data.concat(data2);
-                            res.send(info);
+                            res.json(info);
                         })
                 }
             })
