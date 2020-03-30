@@ -16,6 +16,11 @@ var FishSchema = new Schema({
         type: String,
         required: true,
     },
+    shadow: {
+        type: String,
+        required: true,
+    },
+    
     time: {
         type: String,
         required: true,

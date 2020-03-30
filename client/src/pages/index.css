@@ -1,5 +1,6 @@
 .curMonth {
     background-color: green;
+    border: black 3px solid;
     color: white;
     font-weight: bold;
 }
@@ -12,6 +13,7 @@
 .results {
     height: 52vh;
     overflow-y: scroll;
+    border-radius: .25em;
 }
 
 .months {
@@ -23,7 +25,6 @@
 
 .months div {
     text-align: center;
-    margin: .25em .25em;
     padding: .5em .5em;
 }
 

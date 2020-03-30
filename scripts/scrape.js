@@ -31,6 +31,7 @@ axios.all(promises)
                 result.price = $(row).find("td").eq(2).text().trim();
                 result.location = $(row).find("td").eq(3).text().trim();
                 if (x === 0) {
+                    result.shadow = $(row).find("td").eq(4).text().trim();
                     result.time = $(row).find("td").eq(5).text().trim();
                 } else {
                     result.time = $(row).find("td").eq(4).text().trim();
